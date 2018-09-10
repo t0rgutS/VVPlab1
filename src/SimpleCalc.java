@@ -211,7 +211,7 @@ public class SimpleCalc {
     }
 
     public void input() {
-        int x = 0, y = 0, z = 0, i = -1, j;
+        int x = 0, y = 0, z = 0, i = -1, k, j;
         boolean b = true;
         while (i != 0) {
             while (i != 2 && i != 3 && i != 0) {
@@ -224,34 +224,53 @@ public class SimpleCalc {
             }
             if (i != 0) {
                 while (b) {
-                    System.out.print("Введите 1-е число: ");
-                    while (!sc.hasNextInt()) {
+                    k = 0;
+                    while (k != 1 && k != 2) {
+                        System.out.println("1 - ввести числа с клавиатуры;\n" +
+                                "2 - сгенерировать случайные числа от -1000 до 1000.");
+                        while (!sc.hasNextInt())
+                            sc.next();
+                        k = sc.nextInt();
+                        sc.nextLine();
+                    }
+                    if (k == 1) {
                         System.out.print("Введите 1-е число: ");
-                        sc.next();
-                    }
-                    x = sc.nextInt();
-                    sc.nextLine();
-                    System.out.print("Введите 2-е число: ");
-                    while (!sc.hasNextInt()) {
-                        System.out.print("Введите 2-е число: ");
-                        sc.next();
-                    }
-                    y = sc.nextInt();
-                    sc.nextLine();
-                    if (i == 3) {
-                        System.out.print("Введите 3-е число: ");
                         while (!sc.hasNextInt()) {
-                            System.out.print("Введите 3-е число: ");
+                            System.out.print("Введите 1-е число: ");
                             sc.next();
                         }
-                        z = sc.nextInt();
+                        x = sc.nextInt();
                         sc.nextLine();
+                        System.out.print("Введите 2-е число: ");
+                        while (!sc.hasNextInt()) {
+                            System.out.print("Введите 2-е число: ");
+                            sc.next();
+                        }
+                        y = sc.nextInt();
+                        sc.nextLine();
+                        if (i == 3) {
+                            System.out.print("Введите 3-е число: ");
+                            while (!sc.hasNextInt()) {
+                                System.out.print("Введите 3-е число: ");
+                                sc.next();
+                            }
+                            z = sc.nextInt();
+                            sc.nextLine();
+                        }
+                    } else {
+                        Random rand = new Random();
+                        x = rand.nextInt(2001) - 1000;
+                        y = rand.nextInt(2001) - 1000;
+                        if (i == 3)
+                            z = rand.nextInt(2001) - 1000;
                     }
                     b = false;
                 }
                 j = -1;
                 while (j != 0) {
                     if (i == 2) {
+                        System.out.println("Ваши числа:\nx = " + x + "\ny = " + y);
+                        sc.nextLine();
                         System.out.println("Выберите операцию:\n1. x - y;\n2. x*y;\n3. x*=y;\n4. x^y;\n5. x >>= y;\n" +
                                 "6. x < y;\n7. x > 0 & y > 0;\n8. x > 0 | y > 0;\n9. x == y;\n" +
                                 "11. Ввести другие числа;\n0. Назад");
@@ -293,6 +312,8 @@ public class SimpleCalc {
                                 break;
                         }
                     } else {
+                        System.out.println("Ваши числа:\nx = " + x + "\ny = " + y + "\nz = " + z);
+                        sc.nextLine();
                         System.out.println("Выберите операцию:\n1. x - y * z;\n2. x ^ y * z;\n3. x >>= y - z\n" +
                                 "4. x >>= y ^ z;\n5. x - y ^ z;\n6. x - y - z;\n7. x ^ y ^ z;\n8. x >>= y >>= z;\n" +
                                 "9. x *= y *= z;\n10. x > y || y > z || z > x;" +
